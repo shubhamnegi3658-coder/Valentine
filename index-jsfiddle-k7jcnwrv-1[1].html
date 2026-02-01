@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JSFiddle k7jcnwrv</title>
+
+  <style>
+    body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  text-align: center;
+  overflow: hidden;
+}
+
+button {
+  padding: 14px 24px;
+  font-size: 18px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#yes {
+  background: #ff3366;
+  color: white;
+}
+
+#no {
+  position: absolute;
+  background: #444;
+  color: white;
+}
+
+#reaction {
+  position: fixed;
+  bottom: 20px;
+  display: none;
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+  </style>
+
+  
+</head>
+<body>
+  <h1 id="question">Will you be my Valentine? 💖</h1>
+
+<div>
+  <button id="yes">Yes 😍</button>
+  <button id="no">No 🙄</button>
+</div>
+
+<div id="reaction">👀 Screenshot detected… Naughty choice 😏</div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+const name = params.get("name");
+if (name) {
+  document.getElementById("question").innerText =
+    `Will you be my Valentine, ${name}? 💖`;
+}
+
+const noBtn = document.getElementById("no");
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 120);
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+});
+
+document.getElementById("yes").addEventListener("click", () => {
+  document.body.innerHTML = `
+    <h1>💖 Wow! 💖</h1>
+    <p style="font-size:22px;">
+    Your choice is amazing, and you deserve the best — so you got the best.
+    </p>
+  `;
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    const reaction = document.getElementById("reaction");
+    reaction.style.display = "block";
+    setTimeout(() => reaction.style.display = "none", 3000);
+  }
+});
+  </script>
+</body>
+</html>
